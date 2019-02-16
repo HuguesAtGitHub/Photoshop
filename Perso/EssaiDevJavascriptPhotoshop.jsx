@@ -1,6 +1,6 @@
 ﻿/***
-	
-	Premier essai
+
+	Premier essai dans Github
 
 ***/
 
@@ -22,7 +22,7 @@ function ProgrammePrincipal () {
 
 }
 
-ProgrammePrincipal.prototype.redimensionne = function(photo) {	
+ProgrammePrincipal.prototype.redimensionne = function(photo) {
 
 	try {
 		open (photo);
@@ -76,31 +76,31 @@ ProgrammePrincipal.prototype.redimensionne = function(photo) {
 }
 
 
-ProgrammePrincipal.prototype.toutEtOK = function() {	
+ProgrammePrincipal.prototype.toutEtOK = function() {
 	// Photoshop must be running
 	if (BridgeTalk.isRunning("photoshop")) {
 		$.writeln("OK, photoshop tourne !");
-		return true;		
+		return true;
 	}
-	
-	// Fail if these preconditions are not met 
+
+	// Fail if these preconditions are not met
 	$.writeln("ERREUR: Ne peut pas démarrer le programme principal...");
 	$.writeln(this.elementsRequis);
-	return false;	
+	return false;
 }
 
 
 ProgrammePrincipal.prototype.run = function() {
-	
+
 	if (!this.toutEtOK()) {
 		$.writeln ("Ca ne marche pas");
 		return false;
 	}
 
-	
+
 	$.writeln("OK, ça tourne !");
 	$.getenv("temp");
-	
+
 // Recherche du dernier chemin parcouru
 
 	var dernierRepertoireLu="~";
@@ -114,9 +114,9 @@ ProgrammePrincipal.prototype.run = function() {
 	}
 
 	var repertoire=Folder.selectDialog ("Choix du répertoire :",dernierRepertoireLu);
-	
+
 	$.writeln("Chemin : " + repertoire.path + "/" + repertoire.name);
-	
+
 // Stockage du dernier répertoire lu
 
 	fichierDeConfiguration.open("w");
@@ -126,8 +126,8 @@ ProgrammePrincipal.prototype.run = function() {
 
 
 	this.traitementDesPhotos(repertoire);
-	
-	
+
+
 	return true;
 
 }
@@ -173,7 +173,7 @@ ProgrammePrincipal.prototype.traitementDesPhotos = function(repertoire) {
 				var secondes=secondes[0];
 				var heure=heure[0];
 				var DateTimeOriginal=String(annee) + mois + jour + heure + minutes + secondes;
-	
+
 // Renomme la photo
 				var compteur=parseInt(millisecondes);
 				var leFichierExiste=true;
@@ -189,8 +189,8 @@ ProgrammePrincipal.prototype.traitementDesPhotos = function(repertoire) {
 					photo.rename(nouveauNomDeLaPhoto);
 					$.writeln("Renommée "  + nouveauNomDeLaPhoto);
 				}
-				
-				
+
+
 
 				ProgrammePrincipal.tableauFormatHTML.writeln("<H3>");
 				ProgrammePrincipal.tableauFormatHTML.writeln(photo.name);
@@ -234,12 +234,12 @@ ProgrammePrincipal.prototype.traitementDesPhotos = function(repertoire) {
 ***/
 		}
 	}
-		
+
 	ProgrammePrincipal.tableauFormatHTML.writeln("</BODY>");
 	ProgrammePrincipal.tableauFormatHTML.writeln("</HTML>");
 	ProgrammePrincipal.tableauFormatHTML.close();
 	return true;
-	
+
 }
 
 ProgrammePrincipal.prototype.informationsSurLimage = function(photo) {
@@ -353,7 +353,7 @@ ProgrammePrincipal.prototype.donneesXMP = function(photo) {
 	tableauXMP.deleteProperty(XMPConst.NS_EXIF,"XPComment");
 //~ 	tableauXMP.setProperty(XMPConst.NS_EXIF,"XPComment", "#################sdfsdfsdfsdfd################", 0, XMPConst.STRING );
 
-	
+
 	// Write updated metadata into the file
 	if ( fichierXMP.canPutXMP( tableauXMP ) ) {
 		fichierXMP.putXMP( tableauXMP );
